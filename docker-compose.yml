@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  user-service:
+    image: user-smartseals
+    ports:
+      - 4000:3000
+    depends_on:
+      - vehicle-service
+  vehicle-service:
+    image: vehicle-smartseals
+    ports:
+      - 5000:4000
+    
