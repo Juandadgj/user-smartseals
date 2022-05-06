@@ -12,12 +12,12 @@ const router = Router();
 
 router.put('/user/:id', verifyToken, updateUser);
 
-router.delete('/user/:id', [verifyToken, isAdmin], deleteUser);
+router.delete('/user/:id', verifyToken, deleteUser);
 
 router.post('/signup', signup);
 
 router.post('/signin', signin);
 
-router.get('/vehicles-user/:id', verifyToken, vehiclesByUser);
+router.get('/vehicles-user/:id', vehiclesByUser);
 
 export default router;

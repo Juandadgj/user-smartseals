@@ -40,7 +40,7 @@ export const signup = async (req, res) => {
         user.roles = [role._id];
         const userSaved = await user.save();
         const token = jwt.sign({id: userSaved._id}, process.env.SECRET, {expiresIn: 86400});
-        res.status(200).json({token: token});
+        res.status(200).json({token: token, id: userSaved.id});
     } catch (error) {
         console.log(error);
         res.status(400).json({message: error.message});
@@ -55,7 +55,7 @@ export const signin = async (req, res) => {
         if (!user) throw new Error('User not found :(');
         if (await bcrypt.compare(password, user.password)) {
             const token = jwt.sign({id: user._id}, process.env.SECRET, {expiresIn: 86400});
-            res.status(202).json({token: token});
+            res.status(202).json({token: token, id: user.id});
         } else {
             res.status(401).json({token: null, message: "Invalid password :("});
         }
